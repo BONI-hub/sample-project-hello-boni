@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+	id="cordova.plugin.boni" version="0.0.1">
+	<name>Boni</name>
+	<description>Cordova Boni Plugin</description>
+<license>Apache 2.0</license>
+<keywords>cordova,boni</keywords>
+<js-module name="BoniManager" src="www/BoniManager.js">
+<merges target="cordova.plugins"/>
+</js-module>
+<js-module name="Config" src="www/config.js">
+<runs/>
+</js-module>
+<dependency id="com.unarin.cordova.beacon" url="https://github.com/petermetz/cordova-plugin-ibeacon" />
+</plugin>
