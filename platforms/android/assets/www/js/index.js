@@ -17,37 +17,55 @@
  * under the License.
  */
 var app = {
-    // Application Constructor
-    initialize: function() {
-        this.bindEvents();
-    },
-    // Bind Event Listeners
-    //
-    // Bind any events that are required on startup. Common events are:
-    // 'load', 'deviceready', 'offline', and 'online'.
-    bindEvents: function() {
-        document.addEventListener('deviceready', this.onDeviceReady, false);
-    },
-    // deviceready Event Handler
-    //
-    // The scope of 'this' is the event. In order to call the 'receivedEvent'
-    // function, we must explicitly call 'app.receivedEvent(...);'
-    onDeviceReady: function() {
-        app.receivedEvent('deviceready');
+  // Application Constructor
+  initialize: function() {
+    this.bindEvents();
+  },
+  // Bind Event Listeners
+  //
+  // Bind any events that are required on startup. Common events are:
+  // 'load', 'deviceready', 'offline', and 'online'.
+  bindEvents: function() {
+    document.addEventListener('deviceready', this.onDeviceReady, false);
+  },
+  // deviceready Event Handler
+  //
+  // The scope of 'this' is the event. In order to call the 'receivedEvent'
+  // function, we must explicitly call 'app.receivedEvent(...);'
+  onDeviceReady: function() {
+    app.receivedEvent('deviceready');
 
-        cordova.plugins.BoniManager.ranging();
-    },
-    // Update DOM on a Received Event
-    receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
+    cordova.plugins.boniManager.ranging();
+    cordova.plugins.boniManager.onUserJustInSpot(function(error, beacons) {
+      console.log("RESULT: " + JSON.stringify(beacons));
+    });
+    cordova.plugins.boniManager.onUserImmediateToSpot(function(error,
+      beacons) {
+      console.log("IMMEDIATE");
+      document.body.style.background = "green";
+    });
+    cordova.plugins.boniManager.onUserNearToSpot(function(error,
+      beacons) {
+      console.log("NEAR");
+      document.body.style.background = "red";
+    });
+    cordova.plugins.boniManager.onUserFarFromSpot(function(error,
+      beacons) {
+      console.log("FAR");
+      document.body.style.background = "blue";
+    });
+  },
+  // Update DOM on a Received Event
+  receivedEvent: function(id) {
+    var parentElement = document.getElementById(id);
+    var listeningElement = parentElement.querySelector('.listening');
+    var receivedElement = parentElement.querySelector('.received');
 
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
+    listeningElement.setAttribute('style', 'display:none;');
+    receivedElement.setAttribute('style', 'display:block;');
 
-        console.log('Received Event: ' + id);
-    }
+    console.log('Received Event: ' + id);
+  }
 };
 
 app.initialize();

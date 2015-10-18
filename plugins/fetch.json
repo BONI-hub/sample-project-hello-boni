@@ -15,13 +15,5 @@
         },
         "is_top_level": false,
         "variables": {}
-    },
-    "cordova.plugin.boni": {
-        "source": {
-            "type": "local",
-            "path": "../cordova-plugin-boni"
-        },
-        "is_top_level": true,
-        "variables": {}
     }
 }
