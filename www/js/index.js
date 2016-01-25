@@ -36,20 +36,18 @@ var app = {
     app.receivedEvent('deviceready');
 
     cordova.plugins.boniManager.ranging();
-    cordova.plugins.boniManager.onUserJustInSpot(function(error, beacons) {
-      console.log("RESULT: " + JSON.stringify(beacons));
-    });
-    cordova.plugins.boniManager.onUserImmediateToSpot(function(error,
+
+    cordova.plugins.boniManager.onImmediateToSpot(function(error,
       beacons) {
       console.log("IMMEDIATE");
       document.body.style.background = "green";
     });
-    cordova.plugins.boniManager.onUserNearToSpot(function(error,
+    cordova.plugins.boniManager.onNearToSpot(function(error,
       beacons) {
       console.log("NEAR");
       document.body.style.background = "red";
     });
-    cordova.plugins.boniManager.onUserFarFromSpot(function(error,
+    cordova.plugins.boniManager.onFarFromSpot(function(error,
       beacons) {
       console.log("FAR");
       document.body.style.background = "blue";
