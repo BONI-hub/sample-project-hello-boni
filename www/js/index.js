@@ -35,22 +35,31 @@ var app = {
   onDeviceReady: function() {
     app.receivedEvent('deviceready');
 
-    cordova.plugins.boniManager.ranging();
+    cordova.plugins.boni.configure({
+      uuid: ['fda50693-a4e2-4fb1-afcf-c6eb07647825']
+    });
 
-    cordova.plugins.boniManager.onImmediateToSpot(function(error,
+    cordova.plugins.boni.ranging();
+
+    cordova.plugins.boni.onAlwaysForSpot(function(error,
       beacons) {
-      console.log("IMMEDIATE");
-      document.body.style.background = "green";
+      console.log("Always");
+      document.body.style.background = "purple";
     });
-    cordova.plugins.boniManager.onNearToSpot(function(error,
-      beacons) {
-      console.log("NEAR");
-      document.body.style.background = "red";
+    cordova.plugins.boni.onImmediateToSpot(function(error,
+        beacons) {
+        console.log("Immediate");
+        document.body.style.background = "green";
     });
-    cordova.plugins.boniManager.onFarFromSpot(function(error,
-      beacons) {
-      console.log("FAR");
-      document.body.style.background = "blue";
+    cordova.plugins.boni.onNearToSpot(function(error,
+        beacons) {
+        console.log("NEAR");
+        document.body.style.background = "red";
+    });
+    cordova.plugins.boni.onFarFromSpot(function(error,
+        beacons) {
+        console.log("FAR");
+        document.body.style.background = "blue";
     });
   },
   // Update DOM on a Received Event
